@@ -12,12 +12,20 @@ from openai import AsyncOpenAI
 import os
 from datetime import datetime
 
+from dotenv import load_dotenv
+
 # ============================================================================
-# КОНФИГУРАЦИЯ
+# БЕЗОПАСНАЯ КОНФИГУРАЦИЯ
 # ============================================================================
 
-GROQ_API_KEY = ""
+# Загружаем переменные окружения
+load_dotenv()
+
+GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 GROQ_BASE_URL = "https://api.groq.com/openai/v1"
+
+if not GROQ_API_KEY:
+    raise ValueError("❌ GROQ_API_KEY не найден в переменных окружения!")
 
 
 # ============================================================================
